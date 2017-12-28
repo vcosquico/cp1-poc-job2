@@ -105,13 +105,21 @@
 
         <div class="copado-lightning-VF">
             <apex:pageMessages id="pmessage" rendered="{!$User.UIThemeDisplayed != 'Theme4d'}"/>
+
             <c:ComplianceScanResult sId="{!copado__User_Story__c.Id}" apiName="User_Story__c"  rendered="{!$User.UIThemeDisplayed != 'Theme4d'}"/>
             <apex:outputPanel layout="block" styleClass="slds-scope copado-lightning-container" rendered="{!$User.UIThemeDisplayed == 'Theme4d'}">
+            <apex:form id="jobsManagerForm">
                 <div class="slds-page-header">
                   <apex:outputPanel layout="block" id="pageMessages">
                     <apex:pagemessages id="msg"/>
                     <c:ComplianceScanResult sId="{!copado__User_Story__c.Id}" apiName="User_Story__c"/>
                   </apex:outputPanel>
+                    
+                  <c:JobsManager matchingKeys="GIT-{!flowDetails.flow.copado__Git_Repository__c}-{!targetBranch}"></c:JobsManager>
+                    <apex:actionFunction name="renderFlow" rerender="apexDetail" />
+                    <apex:actionFunction name="rerenderHeaderFields" rerender="headerFields" oncomplete="rerenderheaderOnSave();"/>
+                      <!--<apex:actionPoller action="{!waitForDeployment}" id="thePoller" reRender="apexDetail,thePoller,msg" interval="10" enabled="{!IsPollerEnabled}" oncomplete="checkScreenLockerStatus({!IsPollerEnabled},{!showHideMsg},{!validationHasError});"/>-->
+                    
                   <div class="slds-grid">
                     <div class="slds-col slds-has-flexi-truncate">
                       <div class="slds-media">
@@ -123,8 +131,8 @@
                               </span>
                           </div>
                           <div class="slds-media__body">
-                            <p class="slds-text-heading--label slds-line-height--reset">{!$ObjectType.User_Story__c.Label}</p>
-                              <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="{!$ObjectType.User_Story__c.Label}">{!User_Story__c.Name}</h1>
+                            <p class="slds-text-heading--label slds-line-height--reset">{!$ObjectType.copado__User_Story__c.Label}</p>
+                              <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="{!$ObjectType.copado__User_Story__c.Label}"><Apex:outputField value="{!copado__User_Story__c.Name}"/></h1>
                           </div>
                       </div>
                     </div>
@@ -162,6 +170,7 @@
                     </ul>
                   </apex:outputPanel>
                 </div>
+                </apex:form>
             </apex:outputPanel>
           
             <div id="screenLockerLightning" class="slds-screenlocker" style="display: none;">
@@ -248,7 +257,7 @@
                                   <dl class="slds-list_horizontal slds-wrap">
                                     <apex:repeat value="{!userStoriesAhead}" var="userStory">
                                       <dt class="slds-coach__item slds-item_label slds-text-color_weak">
-                                        <apex:outputLink value="/{!userStory.Id}">{!userStory.Name}</apex:outputLink>
+                                        <apex:outputLink value="/{!userStory.Id}"><apex:outputField value="{!userStory.Name}"/></apex:outputLink>
                                       </dt>
                                       <dd class="slds-coach__value slds-item_detail">
                                         <apex:outputField value="{!userStory.copado__User_Story_Title__c}"/>
@@ -300,14 +309,14 @@
                           </apex:outputPanel>
                         </div>
                       </div>
-                    </apex:outputPanel>
-
-                  
-                    <c:JobsManager matchingKeys="GIT-{!flowDetails.flow.copado__Git_Repository__c}-{!targetBranch}"></c:JobsManager>
-                    <apex:actionFunction name="renderFlow" rerender="apexDetail" />
-                    <apex:actionFunction name="rerenderHeaderFields" rerender="headerFields" oncomplete="rerenderheaderOnSave();"/>
-                    <apex:actionPoller action="{!waitForDeployment}" id="thePoller" reRender="apexDetail,thePoller,msg" interval="10" enabled="{!IsPollerEnabled}" oncomplete="checkScreenLockerStatus({!IsPollerEnabled},{!showHideMsg},{!validationHasError});"/>
+                    </apex:outputPanel>                  
+                    
                   </div>
+
+                  <c:JobsManager matchingKeys="GIT-{!flowDetails.flow.copado__Git_Repository__c}-{!targetBranch}" rendered="{!$User.UIThemeDisplayed != 'Theme4d'}"></c:JobsManager>
+                  <apex:actionFunction name="renderFlow" rerender="apexDetail" rendered="{!$User.UIThemeDisplayed != 'Theme4d'}" />
+                  <apex:actionFunction name="rerenderHeaderFields" rerender="headerFields" oncomplete="rerenderheaderOnSave();" rendered="{!$User.UIThemeDisplayed != 'Theme4d'}"/>
+                  <apex:actionPoller action="{!waitForDeployment}" id="thePoller" reRender="apexDetail,thePoller,msg" interval="10" enabled="{!IsPollerEnabled}" oncomplete="checkScreenLockerStatus({!IsPollerEnabled},{!showHideMsg},{!validationHasError});"/>
                 </apex:form>
 
               <apex:outputPanel layout="block" styleClass="copado-lightning-container">
@@ -361,17 +370,19 @@
               if(!enabled){                
                 $copado('[id$=screenLockerLightning]').hide();
                 console.log('checkScreenLockerStatus:::hasError',hasError);
+                $copado('#miniSpinner').hide();
                 if(hasError){
                   setLockMessage(true,"{!JSENCODE($Label.copado__validation_error)}",overridePageMessages);
                 }else{
                   setLockMessage(false);
                 }
                 toggleInlineEdit(true);
-                $copado('#miniSpinner').hide();
+                
                 $copado('[Id$=btn_validate]').attr('disabled',false);
                 $copado('[Id$=btn_validate]').bind('click',initValidation);
                 renderFlow();
               }else {                
+                console.log('checkScreenLockerStatus::::enabled',enabled);                
                 if(showHideMsg){
                   $copado('#btnHideMsg').show();       
                   $copado('#screenLockerLightningText').text('{!JSENCODE($Label.copado__us_validation_inprogress)}');
@@ -398,38 +409,42 @@
               return false;
             }
 
-            var iFrameEventMap = {}, userStory = new sforce.SObject('{!JSENCODE(namespace)}'+'User_Story__c'),hasChanges = false,askedToReload = 0; 
-            window.addEventListener("message", function(event){              
-              console.info('event.data.from:::',event.data.from);
-              if(event.data.from === 'userStorySelectedMetadata' || event.data.from === 'apexTestResult'){
-                
-                iFrameEventMap[event.data.from] = event.data;
-                hasChanges = event.data.hasChanges;
-                console.log('reading message from frame:::',event.data,hasChanges);
-                if(hasChanges){
-                  $copado.extend(userStory, event.data.change);
-                                
-                  userStory.Id = "{!copado__User_Story__c.Id}";
-                  result = sforce.connection.update([userStory]);
-                  if (result[0].getBoolean("success")) {            
-                      console.error('User Story updated.');
-                  }
-                  else{
-                      console.error('User Story could not be updated.');
-                  }
-                  if(askedToReload === 0){
-                    setTimeout(doReload(),2000);
-                    askedToReload++;
-                  }
+            var userStoryDeferredChanges = {
+              obj: new sforce.SObject('{!JSENCODE(namespace)}'+'User_Story__c'),
+              receivedFromPages: {'userStorySelectedMetadata': 0, 'apexTestResult': 0}
+            }
+
+            window.addEventListener("message", function(event) {
+              if(event.data.from in userStoryDeferredChanges.receivedFromPages) {
+
+                // mark this particular msg as received in one of the valid sources of events
+                userStoryDeferredChanges.receivedFromPages[event.data.from] = event.data.hasChanges?2:1;
+
+                // collect the fields changed in the object
+                if(event.data.change) {
+                  $copado.extend(userStoryDeferredChanges.obj, event.data.change);
+                }
+
+                var v1=userStoryDeferredChanges.receivedFromPages['userStorySelectedMetadata'], v2=userStoryDeferredChanges.receivedFromPages['apexTestResult'];
+                var allPagesFinished = v1>0 && v2>0,  thereAreChanges = v1>1||v2>1;
+                console.debug("got message", "allPagesFinished?",allPagesFinished, "thereAreChanges?",thereAreChanges, v1, v2,  event.data.change);
+                if(allPagesFinished && thereAreChanges ) {
+                  updateAndDoReload(userStoryDeferredChanges.obj);
                 }
               }
             }, false);
 
-            var doReload = function(){
-              var t = confirm('The User Story has successfully updated by Copado. Would you like to refresh the page to see ?'); // Replace this with a custom label for v10.
-              if(t){
-                window.location.href = window.location.href+'?nr=1'; 
-              }
+            var updateAndDoReload = function(usObj){
+                  usObj.Id = "{!copado__User_Story__c.Id}";
+                  result = sforce.connection.update([usObj]);
+                    console.warn('User Story updated.', usObj, result);
+                  if (!result[0].getBoolean("success")) {
+                      console.error('User Story could not be updated.', result);
+                  }
+                  var t = confirm('The User Story has successfully updated by Copado. Would you like to refresh the page to see ?'); // Replace this with a custom label for v10.
+                  if(t) {
+                    window.location.href = window.location.href+'?nr=1'; 
+                  }
             }
 
             var setLockMessage = function(show, message, cb){

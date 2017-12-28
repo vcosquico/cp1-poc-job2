@@ -270,10 +270,10 @@
                                                                     <li>{!$ObjectType.Step__c.Fields.Status__c.Label}: <span id="txtStatus_{!j.Id}"> </span></li>
                                                                     <li>{!$ObjectType.Step__c.Fields.Name.Label}: {!s.Step.Name}</li>
                                                                     <li>{!$ObjectType.Step__c.Fields.Type__c.Label}: {!s.Step.Type__c}</li>
-                                                                    <li style="{!IF(AND(s.Step.Type__c!='MetaData', s.Step.Type__c!='Git MetaData'),'display:none;','')}">{!$Label.START_TIME}: <span id="txtStartTime_{!j.Id}"> </span></li>
-                                                                    <li style="{!IF(AND(s.Step.Type__c!='MetaData', s.Step.Type__c!='Git MetaData'),'display:none;','')}">{!$Label.END_TIME}: <span id="txtEndTime_{!j.Id}"></span></li>
-                                                                    <li style="{!IF(AND(s.Step.Type__c!='MetaData', s.Step.Type__c!='Git MetaData'),'display:none;','')}">{!$Label.DURATION}: <span id="txtDuration_{!j.Id}"></span></li>
-                                                                    <li style="{!IF(AND(s.Step.Type__c!='MetaData', s.Step.Type__c!='Git MetaData'),'display:none;','')}"><button style="display:none;" id="btnCancel_{!j.Id}" type="button" class="inProgressCancelButton" onclick="copadoApp.cancelDeployment('{!j.Id}')" value="{!$Label.Site.CANCEL}">{!$Label.Site.CANCEL}</button></li>
+                                                                    <li style="{!IF(AND(s.Step.Type__c!='MetaData', s.Step.Type__c!='Git MetaData', s.Step.Type__c!='Git Promotion'),'display:none;','')}">{!$Label.START_TIME}: <span id="txtStartTime_{!j.Id}"> </span></li>
+                                                                    <li style="{!IF(AND(s.Step.Type__c!='MetaData', s.Step.Type__c!='Git MetaData', s.Step.Type__c!='Git Promotion'),'display:none;','')}">{!$Label.END_TIME}: <span id="txtEndTime_{!j.Id}"></span></li>
+                                                                    <li style="{!IF(AND(s.Step.Type__c!='MetaData', s.Step.Type__c!='Git MetaData', s.Step.Type__c!='Git Promotion'),'display:none;','')}">{!$Label.DURATION}: <span id="txtDuration_{!j.Id}"></span></li>
+                                                                    <li style="{!IF(AND(s.Step.Type__c!='MetaData', s.Step.Type__c!='Git MetaData', s.Step.Type__c!='Git Promotion'),'display:none;','')}"><button style="display:none;" id="btnCancel_{!j.Id}" type="button" class="inProgressCancelButton" onclick="copadoApp.cancelDeployment('{!j.Id}')" value="{!$Label.Site.CANCEL}">{!$Label.Site.CANCEL}</button></li>
                                                                 </ul>
                                                             </div>
                                                         </td>

@@ -54,6 +54,19 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
+        <fullName>copado__Compliance_Rule_Group__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Compliance Rule Group</label>
+        <referenceTo>copado__Compliance_Rule_Group__c</referenceTo>
+        <relationshipLabel>Environments</relationshipLabel>
+        <relationshipName>Environments</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
         <fullName>copado__Compliance_Scan_Events__c</fullName>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
@@ -78,19 +91,6 @@
             </valueSetDefinition>
         </valueSet>
         <visibleLines>4</visibleLines>
-    </fields>
-    <fields>
-        <fullName>copado__Compliance_Setting__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
-        <deprecated>false</deprecated>
-        <externalId>false</externalId>
-        <label>Compliance Setting</label>
-        <referenceTo>copado__Compliance_Setting__c</referenceTo>
-        <relationshipLabel>Environments</relationshipLabel>
-        <relationshipName>Environments</relationshipName>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>copado__Compliance_Status__c</fullName>

@@ -428,7 +428,7 @@ MetadataGrid2.prototype.render = function(cbAfterRender) {
     
     this.eltGrid.jqxGrid({
         width: '100%',
-        height: '250px',
+        height: '300px',
         source: dataAdapter,
         showfilterrow: true,
         filterable: true,

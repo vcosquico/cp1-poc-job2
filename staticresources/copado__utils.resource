@@ -3,7 +3,7 @@ var Base64 = {
     _MINSIZEFORBTOA: 10485760, // minimum size to siwtch to BOTA/ATOB native functions ( 200x faster, but not unicode-friendly )
     encode: function(c) {
         console.debug('Base64.encode.length', c.length, c.length > Base64._MINSIZEFORBTOA ? 'using btoa' : 'using unicode-safe');
-
+        // Comment for Changes.
         // NR: there is  issue in btoa/atob: https://developer.mozilla.org/en/docs/Web/API/WindowBase64/Base64_encoding_and_decoding
         // the std solution is too slow, so the fallback is the original code.
         // NR: btoa/atob sometimes fails, but silently, so, we get mangled characters... so, alternative: over 10mb of attachment, switch to native, otherwise, local
@@ -95,7 +95,7 @@ dw.u.retry = function(url, cb, postData, avoidRetry, onError) {
 };
 
 dw.u.getRemote = function(url, cb, postData, avoidRetry, onError, requestType) {
-    if(Copado_Licenses.hasMultiLicense && !(Copado_Licenses.hasCopado ||Copado_Licenses.hasCCM ||Copado_Licenses.hasCST) ) {
+    if(Copado_Licenses.hasMultiLicense && !(Copado_Licenses.hasCopado ||Copado_Licenses.hasCCM ||Copado_Licenses.hasCST || Copado_Licenses.hasCCH) ) {
         var errorMsgs = 'Your current license does not allow performing this action.';
         alert(errorMsgs);
         return;

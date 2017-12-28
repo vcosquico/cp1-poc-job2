@@ -54,8 +54,37 @@ var apexTestResult = {
         usRecord = oldResult.getArray("records")[0];
 
         var changes = {};
-        var change = false;
         // NOTE: this will fail if any of this fields have no FLS for the current user.
+
+        // check if number b differs from usRecord[name] and if so, add the value to the changes dict.
+        var numbersDiffer = function(name, b, changes) {
+            var a = usRecord[me.ns+name];
+            a = a&&!isNaN(a)?a:0;
+            b = b&&!isNaN(b)?b:0;
+            console.debug("numbersDiffer()2", name, b, a, changes);
+            if(a != b) {
+                changes[me.ns+name] = b;
+            }
+        };
+        // check if bool b differs from usRecord[name] and if so, add the value to the changes dict.
+        var booleanDiffer = function(name, b, changes) {
+            var a = usRecord[me.ns+name];
+            a = a&&a!=='false'?1:0;
+            b = b&&b!=='false'?1:0;
+            console.debug("booleanDiffer()2", name, b, a, changes);
+            if(a != b) {
+                changes[me.ns+name] = b;
+            }
+        };
+
+        numbersDiffer('Apex_Code_Coverage__c', me.userStoryCoverage, changes);
+        numbersDiffer('Classes_Without_Coverage__c', me.classesWithoutCoverage, changes);
+        numbersDiffer('Triggers_Without_Coverage__c', me.triggersWithoutCoverage, changes);
+        numbersDiffer('Failing_Methods__c', me.failingMethods, changes);
+        booleanDiffer('Has_Apex_Code__c', me.hasApexCode, changes);
+        var hasChanges = Object.keys(changes).length>0;
+        
+        /*
         if(usRecord[me.ns+'Apex_Code_Coverage__c'] !== undefined && parseInt(usRecord[me.ns+'Apex_Code_Coverage__c']) !== me.userStoryCoverage && !isNaN(me.userStoryCoverage)){
             changes[me.ns+'Apex_Code_Coverage__c'] = !isNaN(me.userStoryCoverage) ? me.userStoryCoverage : 0;
             change = true;
@@ -77,8 +106,9 @@ var apexTestResult = {
             changes[me.ns+'Failing_Methods__c'] = me.failingMethods;
             change = true;
         }
+        */
         console.debug(JSON.stringify(changes));
-        window.parent.postMessage({"from":"apexTestResult", "hasChanges":change, "change":changes}, "*");
+        window.parent.postMessage({"from":"apexTestResult", "hasChanges":hasChanges, "change":changes}, "*");
     },
 
     flsCheck: function(fields){

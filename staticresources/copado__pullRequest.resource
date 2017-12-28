@@ -35,13 +35,13 @@ var gitHubURL = function(base, compare){
 	return 'compare/'+base+'...'+compare+'?expand=1';
 }
 var gitLabURL = function(base, compare){
-	return 'merge_requests/new?merge_request[source_branch]='+base+'&merge_request[target_branch]='+compare;
+	return 'merge_requests/new?merge_request[source_branch]='+compare+'&merge_request[target_branch]='+base;
 }
 var bitBucketURL = function(base, compare){
-	return 'pull-requests/new?source='+base+'&dest='+compare+'&event_source=branch_detail';    
+	return 'pull-requests/new?source='+compare+'&dest='+base+'&event_source=branch_detail';    
 }
 var microsoftURL = function(target,source){
-	return 'Pullrequestcreate?targetRef='+target+'&sourceRef='+source;
+	return 'Pullrequestcreate?targetRef='+source+'&sourceRef='+target;
 }
 
 var urlEncode = function(path){

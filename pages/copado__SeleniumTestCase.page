@@ -8,15 +8,6 @@
               'title': 'Selenium Test Case'
             });
         </script> 
-        <script>
-            window.CopadoParams = {isView: true,
-                apiKey: copado_api_key,
-                apiEndpoint: "{!JSEncode(APIEndpoint)}",
-                apiSessionId: "{!$Api.Session_ID}",
-                testCaseIds: ['{!JSEncode(copado__Selenium_Test_Case__c.Id)}'],
-                testcases: '{!URLENCODE(jsonTestCases)}'
-            };
-        </script>
         <apex:stylesheet value="{!IF($User.UIThemeDisplayed == 'Theme4d',URLFOR($Resource.copado__CopadoLightningCSS),'')}" />
     </head>
 
@@ -43,8 +34,8 @@
                               </span>
                           </div>
                           <div class="slds-media__body">
-                            <p class="slds-text-heading--label slds-line-height--reset">{!$ObjectType.Selenium_Test_Case__c.Label}</p>
-                              <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="{!$ObjectType.Selenium_Test_Case__c.Label}">{!Selenium_Test_Case__c.Name}</h1>
+                            <p class="slds-text-heading--label slds-line-height--reset">{!$ObjectType.copado__Selenium_Test_Case__c.Label}</p>
+                              <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="{!$ObjectType.copado__Selenium_Test_Case__c.Label}"><apex:outputField value="{!copado__Selenium_Test_Case__c.Name}"/></h1>
                           </div>
                       </div>
                     </div>
@@ -69,6 +60,15 @@
                       var copado_api_key = document.getElementById('{!$Component.api_key}').innerText;
                     </script>
                 </div>
+                <script>
+                    window.CopadoParams = {isView: true,
+                        apiKey: copado_api_key,
+                        apiEndpoint: "{!JSEncode(APIEndpoint)}",
+                        apiSessionId: "{!$Api.Session_ID}",
+                        testCaseIds: ['{!JSEncode(copado__Selenium_Test_Case__c.Id)}'],
+                        testcases: '{!URLENCODE(jsonTestCases)}'
+                    };
+                </script>
                 <apex:outputPanel layout="block" styleClass="copado-lightning-container" style="padding-top:12px;">
                     <apex:detail subject="{!copado__Selenium_Test_Case__c.Id}" relatedList="true" title="true" showChatter="{!IF($User.UIThemeDisplayed == 'Theme4d','false','true')}" rendered="{!and($Setup.copado__Settings__c.copado__Enabled_Multi_Licenses__c, $Setup.copado__Copado_License__c.copado__Enable_CST__c)}"/>
                 </apex:outputPanel>

@@ -33,7 +33,7 @@
                           </div>
                           <div class="slds-media__body">
                             <p class="slds-text-heading--label slds-line-height--reset">{!$ObjectType.copado__Scheduled_Job__c.Label}</p>
-                              <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="{!$ObjectType.copado__Scheduled_Job__c.Label}">{!copado__Scheduled_Job__c.Name}</h1>
+                              <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="{!$ObjectType.copado__Scheduled_Job__c.Label}"><apex:outputField value="{!copado__Scheduled_Job__c.Name}"/></h1>
                           </div>
                       </div>
                     </div>

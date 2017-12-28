@@ -123,3 +123,7 @@ HTML {
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
 }
+
+.jqx-widget-header, .jqx-tabs-header, .jqx-grid-column-header, .jqx-grid-cell-pinned, .jqx-fill-state-pressed, .jqx-fill-state-normal, .jqx-grid-cell-filter {
+    background-color: #FFF !important;
+}

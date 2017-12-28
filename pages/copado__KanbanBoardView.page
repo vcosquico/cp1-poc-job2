@@ -284,9 +284,9 @@
                                 </span>
                             </div>
                             <div class="slds-media__body">
-                                <p class="slds-text-heading--label slds-line-height--reset">{!$ObjectType.Kanban_Board__c.Label}</p>
-                                <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="{!$ObjectType.Kanban_Board__c.Label} {!$Label.copado__edit}">{!Kanban_Board__c.Name}</h1><br/>
-                                <p class="slds-text-body_small slds-line-height--reset">{!Kanban_Board__c.Description__c}</p>
+                                <p class="slds-text-heading--label slds-line-height--reset">{!$ObjectType.copado__Kanban_Board__c.Label}</p>
+                                <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="{!$ObjectType.copado__Kanban_Board__c.Label} {!$Label.copado__edit}"><apex:outputField value="{!copado__Kanban_Board__c.Name}"/></h1><br/>
+                                <p class="slds-text-body_small slds-line-height--reset"><apex:outputField value="{!copado__Kanban_Board__c.copado__Description__c}"/></p>
                             </div>
                           </div>
                     </div>

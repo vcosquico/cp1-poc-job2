@@ -299,7 +299,7 @@
             </values>
             <values>
                 <fullName>Document Only</fullName>
-                <default>true</default>
+                <default>false</default>
             </values>
         </picklistValues>
         <picklistValues>
@@ -318,7 +318,7 @@
             </values>
             <values>
                 <fullName>Medium</fullName>
-                <default>true</default>
+                <default>false</default>
             </values>
         </picklistValues>
         <picklistValues>
@@ -366,7 +366,7 @@
             </values>
             <values>
                 <fullName>Document Only</fullName>
-                <default>true</default>
+                <default>false</default>
             </values>
         </picklistValues>
         <picklistValues>
@@ -385,7 +385,7 @@
             </values>
             <values>
                 <fullName>Medium</fullName>
-                <default>true</default>
+                <default>false</default>
             </values>
         </picklistValues>
         <picklistValues>

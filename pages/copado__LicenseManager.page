@@ -24,6 +24,7 @@
             <apex:outputPanel layout="block" styleClass="slds-scope copado-lightning-container" rendered="{!$User.UIThemeDisplayed == 'Theme4d'}">
                     
                 <div class="slds-page-header">
+                	<apex:pageMessages id="pageMessage" />
                 	<apex:pageMessage severity="INFO" strength="3" title="{!$Label.copado__license_manager_deactivated}" summary="{!$Label.copado__license_manager_inactive_descripton}" rendered="{!NOT(enableMultiLicenses)}"/>
 
 					<apex:outputPanel layout="block" styleClass="fixedMsg">
@@ -43,17 +44,37 @@
                           </div>
                       </div>
                     </div>
-                    <!-- ACTION BUTTONS -->
-                    <div class="slds-col slds-no-flex slds-grid slds-align-top ">
-                      <div class="slds-button-group" role="group">
-                        
-                      </div>
-                    </div>
                     <!-- / ACTION BUTTONS -->
                   </div>
-                  <div style="background: white; height: 25px;">
-                    <!-- Header details buffer-->
+                  <div class="slds-grid">
+                    <div class="slds-col slds-align-middle">
+                        <p class="slds-text-body_small"></p>
+                    </div>
                   </div>
+                    <apex:outputPanel layout="block" style="background: white;" id="headerFields">
+                    <ul class="slds-grid slds-page-header__detail-row">
+                        <li class="slds-page-header__detail-block">
+                            <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="{!$Label.copado__org_name}">{!$Label.copado__org_name}</p>
+                            <p class="slds-text-body_regular slds-truncate" title="">{!$Organization.Name}</p>
+                        </li>
+                        <li class="slds-page-header__detail-block">
+                            <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="{!$Label.copado__org_id}">{!$Label.copado__org_id}</p>
+                            <p class="slds-text-body_regular slds-truncate" title="{!$Organization.Id}">{!$Organization.Id}</p>
+                        </li>
+                        <li class="slds-page-header__detail-block">
+                            <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="{!$Label.copado__user_name}">{!$Label.copado__name}</p>
+                            <p class="slds-text-body_regular slds-truncate" title="">{!$User.FirstName} {!$User.LastName}</p>
+                        </li>
+                        <li class="slds-page-header__detail-block">
+                            <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="{!$Label.copado__user_name}">{!$Label.copado__username}</p>
+                            <p class="slds-text-body_regular slds-truncate" title="">{!$User.Username}</p>
+                        </li>
+                        <li class="slds-page-header__detail-block">
+                            <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="{!$Label.copado__user_id}">{!$Label.copado__user_id}</p>
+                            <p class="slds-text-body_regular slds-truncate" title="{!$User.Id}">{!$User.Id}</p>
+                        </li>
+                    </ul>
+                  </apex:outputPanel>
                 </div>
             </apex:outputPanel>
 
@@ -70,7 +91,7 @@
 					</apex:outputPanel>
 					<apex:pageBlock id="pbInit" rendered="{!initRun==false}">
 						<apex:pageBlockButtons location="bottom">
-							<apex:commandButton id="btnGetLicenseInfo" value="{!$Label.copado__get_license_information}" action="{!init}" status="status" reRender="theForm" />
+							<apex:commandButton id="btnGetLicenseInfo" value="{!$Label.copado__get_license_information}" action="{!init}" status="status" reRender="pageMessage,theForm" />
 						</apex:pageBlockButtons>
 						{!$Label.copado__license_manager_introduction}
 					</apex:pageBlock>
@@ -134,7 +155,7 @@
 							</apex:pageBlockSectionItem>					
 								<apex:pageBlockSectionItem >
 									<apex:outputLabel value="" />
-									<apex:commandButton id="btnAddUser" value="{!$Label.copado__add_update_user}" action="{!addUser}" reRender="theForm" status="status" />
+									<apex:commandButton id="btnAddUser" value="{!$Label.copado__add_update_user}" action="{!addUser}" reRender="pageMessage,theForm" status="status" />
 								</apex:pageBlockSectionItem>
 							</apex:pageBlockSection>
 						</apex:pageBlock>

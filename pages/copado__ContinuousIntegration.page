@@ -45,7 +45,7 @@
                           </div>
                           <div class="slds-media__body">
                             <p class="slds-text-heading--label slds-line-height--reset">Copado Continuous Integration</p>
-                              <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Copado Continuous Integration">{!copado__Continuous_Integration__c.Name}</h1>
+                              <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Copado Continuous Integration"><apex:outputField value="{!copado__Continuous_Integration__c.Name}"/></h1>
                           </div>
                       </div>
                     </div>
@@ -93,7 +93,7 @@
 							$copado('#copadoIframe').attr('data-src', url);
 						},
 						openDeploymentStatus: function(deploymentId){
-							ci.setIframeLocker('/apex/deploymentStatus?id='+deploymentId);
+							ci.setIframeLocker('/apex/{!JSENCODE(namespace)}deploymentStatus?id='+deploymentId);
 							openIframeBox();
 						},
 						setStatusMessage: function(buildTaskId, value){

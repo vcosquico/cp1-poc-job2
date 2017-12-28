@@ -9,21 +9,25 @@ global class GlobalAPI {
     global GlobalAPI() {
 
     }
-    global String deleteCopadoLicense(Id licenseId) {
+    global Boolean deleteCopadoLicense(Id userId) {
         return null;
     }
     global copado.GlobalAPI.CopadoLicenses getLicenseInformation() {
         return null;
     }
-    global List<copado__Copado_License__c> listCopadoLicenses() {
+    global List<copado.GlobalAPI.UserLicense> listCopadoLicenses() {
         return null;
     }
-    global String upsertCopadoLicense(copado__Copado_License__c license) {
+    global String upsertCopadoLicense(Id userId, copado.GlobalAPI.UserLicense licenseDetails) {
         return null;
     }
+global class CopadoAPIException extends Exception {
+}
 global class CopadoLicenses {
     global CopadoLicenses() {
 
     }
+}
+global class UserLicense {
 }
 }

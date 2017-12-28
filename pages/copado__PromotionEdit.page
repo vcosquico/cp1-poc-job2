@@ -68,7 +68,7 @@
               </apex:inputField>
               <apex:pageBlockSectionItem rendered="{!copado__Promotion__c.copado__Project__c=null && copado__Promotion__c.copado__Release__c!=null}"/>
               <apex:inputField value="{!copado__Promotion__c.copado__Status__c}" />
-              <apex:inputField value="{!copado__Promotion__c.copado__Source_Environment__c}" rendered="{!copado__Promotion__c.copado__Back_Promotion__c=false}">
+              <apex:inputField value="{!copado__Promotion__c.copado__Source_Environment__c}"  required="true" rendered="{!copado__Promotion__c.copado__Back_Promotion__c=false}">
                  <apex:actionSupport event="onblur" rerender="TheForm"></apex:actionSupport>
               </apex:inputField>
               <apex:inputField value="{!copado__Promotion__c.copado__Destination_Environment__c}" rendered="{!copado__Promotion__c.copado__Back_Promotion__c=true}">

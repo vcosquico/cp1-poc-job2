@@ -1,4 +1,4 @@
-<apex:page controller="copado.SeleniumTestQuickRun" tabStyle="copado__Selenium_Test_Run__c" extensions="copado.LicenseHelper" id="thePage" lightningStylesheets="true">
+<apex:page controller="copado.SeleniumTestQuickRun" tabStyle="copado__Selenium_Test_Run__c" extensions="copado.LicenseHelper" action="{!quickRun}" id="thePage" lightningStylesheets="true">
     <head>
         <apex:stylesheet value="{!URLFOR($Resource.copado__CopadoLightningCSS)}" />
     </head>
@@ -48,15 +48,9 @@
                 </apex:outputPanel>
 
             </apex:pageBlock>
-            <apex:actionFunction name="doInit" action="{!quickRun}" reRender="theForm"/>
-
         </apex:form>
         
         <script>
-               window.onload=function(){
-                    doInit();
-               }
-
             ga('send', 'pageview', {
                 'page': '/SeleniumTestQuickRun',
                 'title': 'Selenium Test Quick Run'

@@ -1245,6 +1245,66 @@
         <label>SprintWall_MassUpdate</label>
     </fieldSets>
     <fieldSets>
+        <fullName>copado__Work_Manager_Columns</fullName>
+        <description>Used in the Work Manager to specify which fields can be shown as columns</description>
+        <displayedFields>
+            <field>copado__User_Story_Title__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>copado__Status__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>copado__Developer__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>copado__Story_Points_SFDC__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>copado__Project__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>copado__Sprint__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>copado__Epic__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>copado__Release__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>copado__Environment__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>copado__Org_Credential__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>copado__Priority__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Work Manager Columns</label>
+    </fieldSets>
+    <fieldSets>
         <fullName>copado__Work_Manager_Relations</fullName>
         <description>Used in the Work Manager to specify which references can be added as panels</description>
         <displayedFields>
@@ -1430,12 +1490,45 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Compliance Status</label>
-        <length>180</length>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Completed - Findings detected</fullName>
+                    <default>false</default>
+                    <label>Completed - Findings detected</label>
+                </value>
+                <value>
+                    <fullName>Completed - No Findings</fullName>
+                    <default>false</default>
+                    <label>Completed - No Findings</label>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                    <label>In Progress</label>
+                </value>
+                <value>
+                    <fullName>Completed - Resolved</fullName>
+                    <default>false</default>
+                    <label>Completed - Resolved</label>
+                </value>
+                <value>
+                    <fullName>Under Investigation</fullName>
+                    <default>false</default>
+                    <label>Under Investigation</label>
+                </value>
+                <value>
+                    <fullName>Error</fullName>
+                    <default>false</default>
+                    <label>Error</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>copado__Compliance__c</fullName>
@@ -2524,6 +2617,33 @@
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>copado__Compliance_Status__c</picklist>
+            <values>
+                <fullName>Completed - Findings detected</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed - No Findings</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed - Resolved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Error</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Investigation</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>copado__Metadata_Types_in_Selection__c</picklist>
             <values>
                 <fullName>ActionLinkGroupTemplate</fullName>
@@ -2925,6 +3045,33 @@
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>copado__Compliance_Status__c</picklist>
+            <values>
+                <fullName>Completed - Findings detected</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed - No Findings</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed - Resolved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Error</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Investigation</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>copado__Metadata_Types_in_Selection__c</picklist>
             <values>
                 <fullName>ActionLinkGroupTemplate</fullName>
@@ -3322,6 +3469,33 @@
             </values>
             <values>
                 <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>copado__Compliance_Status__c</picklist>
+            <values>
+                <fullName>Completed - Findings detected</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed - No Findings</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed - Resolved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Error</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Investigation</fullName>
                 <default>false</default>
             </values>
         </picklistValues>

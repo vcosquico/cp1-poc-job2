@@ -154,11 +154,6 @@
         <sortField>CREATED_DATE</sortField>
         <sortOrder>Desc</sortOrder>
     </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <fields>copado__Compliance_Setting__c.NAME</fields>
-        <relatedList>copado__Compliance_Setting_Rule__c.copado__Compliance_Rule__c</relatedList>
-    </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
     <showInteractionLogPanel>false</showInteractionLogPanel>

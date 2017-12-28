@@ -76,6 +76,9 @@
                         <apex:outputPanel layout="block" id="pageMessages">
                             <apex:pagemessages id="msg"/>
                         </apex:outputPanel>
+                        <apex:outputPanel layout="block" style="padding-bottom:12px;">
+                            <c:JobsManager matchingKeys="GIT-{!repositoryId}-{!branch}"></c:JobsManager>
+                        </apex:outputPanel>
                       <div class="slds-grid">
                         <div class="slds-col slds-has-flexi-truncate">
                           <div class="slds-media">
@@ -112,7 +115,7 @@
                 </apex:outputPanel>
 
                 <!-- END OF LIGHTNING HEADER -->
-                <c:JobsManager matchingKeys="GIT-{!repositoryId}-{!branch}"></c:JobsManager>
+                <c:JobsManager matchingKeys="GIT-{!repositoryId}-{!branch}" rendered="{!$User.UIThemeDisplayed != 'Theme4d'}"></c:JobsManager>
 
                 <apex:pageBlock id="fieldSets">
                 	<apex:pageBlockSection title="{!$Label.copado__git_snapshot_fields}" id="sFields" showHeader="true" collapsible="true" rendered="{!showSnapshotInformation}">
@@ -151,7 +154,7 @@
                                 </div>
                             
                                 <apex:outputPanel layout="none" >
-                                    <div id="metadataGrid2">
+                                    <div id="metadataGrid2" style="{!IF($User.UIThemeDisplayed == 'Theme4d','width:99%;','')}">
                                         <div class='mg2_tabs'>
                                             <ul style="margin-left: 20px;">
                                                 <li>Metadata Selections</li>

@@ -130,7 +130,7 @@ JsRemoting.deploymentFlows.getFlowStepCoordinates = function(ns, flowId){
     return records;
 };
 JsRemoting.deploymentFlows.queryFlowSteps = function(ns, flowId){
-    var q = 'SELECT Id, __NAMESPACE__Branch__c, __NAMESPACE__Test_Level__c, __NAMESPACE__Automatically_Merge_and_Deploy__c, __NAMESPACE__Deployment_Flow__c, __NAMESPACE__Destination_Environment__c, __NAMESPACE__Destination_Environment__r.Name, __NAMESPACE__Source_Environment__c, __NAMESPACE__Source_Environment__r.Name FROM __NAMESPACE__Deployment_Flow_Step__c WHERE __NAMESPACE__Deployment_Flow__c = \''+flowId+'\' order by __NAMESPACE__Source_Environment__c ASC';
+    var q = 'SELECT Id, Name, __NAMESPACE__Branch__c, __NAMESPACE__Test_Level__c, __NAMESPACE__Automatically_Merge_and_Deploy__c, __NAMESPACE__Deployment_Flow__c, __NAMESPACE__Destination_Environment__c, __NAMESPACE__Destination_Environment__r.Name, __NAMESPACE__Source_Environment__c, __NAMESPACE__Source_Environment__r.Name FROM __NAMESPACE__Deployment_Flow_Step__c WHERE __NAMESPACE__Deployment_Flow__c = \''+flowId+'\' order by __NAMESPACE__Source_Environment__c ASC';
     q = q.replace(new RegExp('__NAMESPACE__','g'), ns);
     var result = sforce.connection.query(q);
     var records = result.getArray('records');

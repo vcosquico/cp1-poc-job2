@@ -62,7 +62,7 @@
                         urlArr = urlArr[1].split('=');
                         txtId = urlArr[1];
                     }
-                    baseURL = "/apex/GitCommitLookup?mode=GitOrgCommit&txt=" + txtId;
+                    baseURL = "/apex/" + copadoApp.ns + "GitCommitLookup?mode=GitOrgCommit&txt=" + txtId;
                     baseURL = baseURL + "&frm=" + encodeURI("{!$Component.theForm}");
                     if (modified == '1') {
                         baseURL = baseURL;
@@ -691,14 +691,14 @@
 
 
                                 <apex:outputPanel layout="none">
-                                <div id="metadataGrid2">
-                                    <div class='mg2_tabs'>
+                                <div id="metadataGrid2" style="{!IF($User.UIThemeDisplayed == 'Theme4d','width:99%;','')}">
+                                    <div class='mg2_tabs' >
                                       <ul style="margin-left: 20px;">
                                         <li>Metadata Selection</li>
                                         <li>Selected Metadata</li>
                                       </ul>
                                       
-                                      <div><!-- div required for jqxTabs -->
+                                      <div ><!-- div required for jqxTabs -->
                                       <div class="mg2_scaleFilterFrame" style="padding: 5px;">
                                         <label class="mg2_mtFilter">Metadata Type Filter</label>&nbsp;
                                         <apex:commandLink value="({!$Label.copado__refresh})"  onclick="return metadataGrid2.refreshMetadataTypes();" rerender="opDummy" id="removeMTCache"/>
@@ -720,11 +720,11 @@
                         
                         <div id="sectionDiv" style="display:none;">
                         <apex:pageBlockSection id="pbds_pb3" columns="1" title="File Differences" >
-                            <div><center><button class="js-grid-save {!IF($User.UIThemeDisplayed=='Theme3','','copado-lightning')}">{!$Label.site.save}</button></center></div>
-                            <div id="fileGrid">
+                            <div><center><button class="js-grid-save copado-lightning">{!$Label.site.save}</button></center></div>
+                            <div id="fileGrid" style="padding-top:8px;padding-bottom:8px;">
                                 <center><i class="empty-msg">{!$Label.copado__loading}</i></center>
                             </div>
-                            <div><center><button class="js-grid-save {!IF($User.UIThemeDisplayed=='Theme3','','copado-lightning')}">{!$Label.site.save}</button></center></div>
+                            <div><center><button class="js-grid-save copado-lightning">{!$Label.site.save}</button></center></div>
                         </apex:pageBlockSection>
                         </div>
                         

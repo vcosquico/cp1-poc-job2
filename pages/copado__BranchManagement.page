@@ -345,6 +345,9 @@
                 backDeploy.labels.NEXT_ENVIRONMENT = 'Next Environment';
                 backDeploy.labels.MORE_DETAILS = 'More Details';
                 backDeploy.labels.IN_SYNC = 'In Sync';
+                backDeploy.labels.noStep = '{!JSENCODE($Label.DF_NO_STEP)}';
+                backDeploy.labels.noSource = '{!JSENCODE($Label.NO_SOURCE_ENV_DF_STEP)}';
+                backDeploy.labels.noDestination = '{!JSENCODE($Label.NO_DESTINATION_ENV_DF_STEP)}';
 
                 backDeploy.SVG_INSYNC_CHECKBOX = '<svg class="slds-button__icon slds-button__icon_left" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.SLDS,'/assets/icons/utility-sprite/svg/symbols.svg#check')}"></use></svg>';
                 backDeploy.SVG_ARROW_RIGHT = '<svg class="slds-button__icon" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.SLDS,'/assets/icons/utility-sprite/svg/symbols.svg#forward')}"></use></svg>';
@@ -352,6 +355,10 @@
 
                 console.info('Assigning step details...');
                 backDeploy.config.map = {!(stepMapJSON)};
+                
+                if(backDeploy.config.map === false){
+                    alert(backDeploy.labels.noStep);
+                }
     
                 $copado( document ).ready(function() {
                     copadoStreamingService.ns = copadoApp.ns;

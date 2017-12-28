@@ -240,7 +240,7 @@
 	                            <div class="slds-media__body">
 	                            	<p class="slds-text-heading--label slds-line-height--reset">{!$ObjectType.Deployment_Task__c.Label}</p>
 	                                <h1 class="slds-page-header__title slds-truncate slds-align-middle" >
-	                                	{!IF(ISBLANK(Deployment_Task__c.ID),'' ,Deployment_Task__c.Name)}
+	                                	<apex:outputField value="{!copado__Deployment_Task__c.Name}"/>
 	                                </h1>
 	                                
 	                            </div>

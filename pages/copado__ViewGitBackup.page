@@ -49,9 +49,9 @@
                         return false;
                     }
                     if( (typeof sforce != 'undefined') && sforce && (!!sforce.one) ) {
-                        sforce.one.navigateToURL('/apex/GitCommitChanges?snapshotId={!JSENCODE(copado__Git_Backup__c.Id)}&repoId={!JSENCODE(copado__Git_Backup__c.copado__Git_Repository__c)}&orgId={!JSENCODE(copado__Git_Backup__c.copado__Org__c)}');
+                        sforce.one.navigateToURL('/apex/{!JSENCODE(namespace)}GitCommitChanges?snapshotId={!JSENCODE(copado__Git_Backup__c.Id)}&repoId={!JSENCODE(copado__Git_Backup__c.copado__Git_Repository__c)}&orgId={!JSENCODE(copado__Git_Backup__c.copado__Org__c)}');
                     } else {
-                        location.href = '/apex/GitCommitChanges?snapshotId={!JSENCODE(copado__Git_Backup__c.Id)}&repoId={!JSENCODE(copado__Git_Backup__c.copado__Git_Repository__c)}&orgId={!JSENCODE(copado__Git_Backup__c.copado__Org__c)}';
+                        location.href = '/apex/{!JSENCODE(namespace)}GitCommitChanges?snapshotId={!JSENCODE(copado__Git_Backup__c.Id)}&repoId={!JSENCODE(copado__Git_Backup__c.copado__Git_Repository__c)}&orgId={!JSENCODE(copado__Git_Backup__c.copado__Org__c)}';
                     }
                 },
                 doSnapshot: function(){
@@ -89,6 +89,9 @@
                   <apex:outputPanel layout="block" id="pageMessages">
                     <apex:pagemessages id="msg"/>
                   </apex:outputPanel>
+                  <apex:form id="jobsManagerForm" style="padding-bottom:12px;">
+                    <c:JobsManager matchingKeys="GIT-{!copado__Git_Backup__c.copado__Git_Repository__c}-{!copado__Git_Backup__c.copado__Branch__c}"></c:JobsManager>
+                  </apex:form>
                   <div class="slds-grid">
                     <div class="slds-col slds-has-flexi-truncate">
                       <div class="slds-media">
@@ -101,7 +104,7 @@
                           </div>
                           <div class="slds-media__body">
                             <p class="slds-text-heading--label slds-line-height--reset">{!$ObjectType.copado__Git_Backup__c.Label}</p>
-                              <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="{!$ObjectType.copado__Git_Backup__c.Label}">{!copado__Git_Backup__c.Name}</h1>
+                              <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="{!$ObjectType.copado__Git_Backup__c.Label}"><apex:outputField value="{!copado__Git_Backup__c.Name}"/></h1>
                           </div>
                       </div>
                     </div>
@@ -145,8 +148,8 @@
 
                     <apex:outputPanel layout="block" >
                         <c:ComplianceScanResult sId="{!copado__Git_Backup__c.Id}" apiName="Git_Snapshot__c"/>  
-                    </apex:outputPanel>                
-                    <c:JobsManager matchingKeys="GIT-{!copado__Git_Backup__c.copado__Git_Repository__c}-{!copado__Git_Backup__c.copado__Branch__c}"></c:JobsManager>
+                    </apex:outputPanel>
+                    <c:JobsManager matchingKeys="GIT-{!copado__Git_Backup__c.copado__Git_Repository__c}-{!copado__Git_Backup__c.copado__Branch__c}" rendered="{!$User.UIThemeDisplayed != 'Theme4d'}"></c:JobsManager>
 
                     <apex:pageBlock id="pb_viewGitBackup"  mode="view" helpUrl="http://docs.copa.do/copado/git-snapshot" helpTitle="{!$Label.copado__help_for_this_page}" rendered="{!AND(showOptions,!showError)}" title="{!$Label.copado__details}">
                         <apex:pageblockButtons id="pbbs" rendered="{!isBackupEnabled}">

@@ -1,4 +1,4 @@
-<apex:page id="thePage" standardController="copado__User_Story__c" extensions="copado.MetadataselectorExtension,copado.Settings" showHeader="false" sidebar="false" standardStyleSheets="true"> 
+<apex:page id="thePage" standardController="copado__User_Story__c" extensions="copado.MetadataselectorExtension,copado.Settings" showHeader="false" sidebar="false" standardStyleSheets="true" lightningStylesheets="true"> 
     <head>
         <c:GAnalytics />
         <c:WizardUtils />

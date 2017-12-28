@@ -291,7 +291,7 @@ backDeploy.floater.repositionFloater = function(boxId) {
 };
 backDeploy.floater.openDeploymentStatus = function(el) {
     var deploymentId = $copado(el).attr('data-deploymentId');
-    backDeploy.setIframeLocker('/apex/deploymentStatus?id=' + deploymentId);
+    backDeploy.setIframeLocker('/apex/'+backDeploy.config.ns+'deploymentStatus?id=' + deploymentId);
     openIframeBox();
 };
 backDeploy.floater.resetIcons = function(boxId) {
@@ -1047,6 +1047,14 @@ backDeploy.queryFlowSteps = function() {
     var records = JsRemoting.deploymentFlows.queryFlowSteps(backDeploy.config.ns, backDeploy.data.flowId);
     for (var i = 0; i < records.length; i++) {
         var r = records[i];
+        if(r[NS + 'Source_Environment__c'] === null){
+            alert(backDeploy.labels.noSource+' '+r['Name']);
+            return;
+
+        } else if(r[NS + 'Destination_Environment__c'] === null) {
+            alert(backDeploy.labels.noDestination+' '+r['Name']);
+            return;
+        }
         backDeploy.data.env2branchMap[r[NS + 'Source_Environment__c']] = r[NS + 'Branch__c'];
         copadoApp.envConnections.push({
             flowStepId: r.Id,

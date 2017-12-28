@@ -4,7 +4,8 @@ utilsV2 = {
     onFailureCB: function(res){},
 
     getRemote: function(url){
-    if(Copado_Licenses.hasMultiLicense && !(Copado_Licenses.hasCopado ||Copado_Licenses.hasCCM ||Copado_Licenses.hasCST) ) {
+    if(Copado_Licenses.hasMultiLicense && !(Copado_Licenses.hasCopado || Copado_Licenses.hasCCM 
+        || Copado_Licenses.hasCST || Copado_Licenses.hasCCH) ) {
             var errorMsgs = 'Your current license does not allow performing this action';
             alert(errorMsgs);
             return false;
@@ -51,6 +52,7 @@ utilsV2 = {
     },
     /**
      * Gets the requested URL parameter.
+     * For commit changes
      * @param  {[String]}  sParam       The name of the requested URL parameter
      * @return {[type]}                 Return true if nothing is found else return param value
      */

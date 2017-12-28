@@ -1,5 +1,5 @@
-<apex:page standardController="copado__User_Story__c" extensions="copado.UserStoryCodeAnalysisRequestController" id="UserStoryCodeAnalysis" lightningStylesheets="true" showHeader="{!$User.UIThemeDisplayed=='Theme3'}" standardStylesheets="true" sidebar="{!$User.UIThemeDisplayed=='Theme3'}" applyHtmlTag="{!$User.UIThemeDisplayed=='Theme3'}" applyBodyTag="false" docType="html-5.0">
-<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+<apex:page standardController="copado__User_Story__c" extensions="copado.UserStoryCodeAnalysisRequestController" id="UserStoryCodeAnalysis" lightningStylesheets="true" showHeader="{!$User.UIThemeDisplayed=='Theme3'}" standardStylesheets="true" sidebar="{!$User.UIThemeDisplayed=='Theme3'}" applyHtmlTag="{!$User.UIThemeDisplayed=='Theme3'}" applyBodyTag="false" docType="html-5.0" action="{!requestCodeScan}">
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en" style="height: 100%;">
 	<apex:slds />
     <head>
       <c:GAnalytics />
@@ -11,7 +11,7 @@
       </script>   
       <apex:stylesheet value="{!URLFOR($Resource.copado__SLDS, 'assets/styles/salesforce-lightning-design-system-vf.min.css')}" />
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-      <apex:stylesheet value="{!URLFOR($Resource.copado__CopadoLightningCSS)}" />
+      <apex:stylesheet value="{!IF($User.UIThemeDisplayed == 'Theme4d',URLFOR($Resource.copado__CopadoLightningCSS),'')}" />
         <style type="text/css">
                 .col-right{
                     margin-left : 15px;
@@ -57,7 +57,11 @@
                 var j$ = jQuery.noConflict();
 
                 j$(document).ready(function(){
-                   overridePageMessages();    
+                    if( (typeof sforce != 'undefined') && sforce && (!!sforce.one) ) {
+                        // Do not override page messages in Lightning
+                    } else {
+                   		overridePageMessages();
+                    }
                 });
                         
                 function overridePageMessages(){    
@@ -79,15 +83,15 @@
                     if( (typeof sforce != 'undefined') && sforce && (!!sforce.one) ) {
                         sforce.one.back();
                     } else {
-                        window.location.href = '/{!JSENCODE(copado__User_Story__c.Id)}';
+                        window.history.back();
                     }
                 }
             </script> 
 
     </head>
-    <body class="slds-scope">
-        <apex:form id="theForm" styleClass="copado-lightning-container">
-        	<div class="slds-page-header">
+    <body class="slds-scope" style="{!IF($User.UIThemeDisplayed == 'Theme4d','margin: 12px;background-image: url(/_slds/images/themes/oneSalesforce/banner-brand-default.png?cache=210.2),linear-gradient(to top,rgba(32, 92, 159, 0), rgb(32, 92, 159));','')}">
+        <apex:form id="theForm">
+        	<div class="slds-page-header" style="{!IF($User.UIThemeDisplayed == 'Theme4d','background: #fdfdfd;margin-bottom: 12px;border-collapse: collapse;border-radius: 4px;','')}">
                 <apex:outputPanel layout="block" id="pageMessages">
                     <apex:pagemessages id="pmessage"/>
                 </apex:outputPanel>

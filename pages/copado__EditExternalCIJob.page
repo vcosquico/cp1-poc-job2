@@ -43,7 +43,11 @@
             var j$ = jQuery.noConflict();
 
             j$(document).ready(function(){
-               overridePageMessages();    
+               if( (typeof sforce != 'undefined') && sforce && (!!sforce.one) ) {
+               		// No override in LEX
+           		} else {
+           			overridePageMessages();
+           		}   
             });
                     
             function overridePageMessages(){    
@@ -423,7 +427,7 @@
 											</apex:outputPanel>
 											
 										</div>
-										<input type="button" value="Add Build Parameter" class="btn" id="btn-js-addUrlParameter" onclick="ciJob.param.addRow(); return false;"></input>
+										<input type="button" value="Add Build Parameter" class="btn slds-button slds-button_neutral" id="btn-js-addUrlParameter" onclick="ciJob.param.addRow(); return false;"></input>
 										
 									</div>
 								</form>

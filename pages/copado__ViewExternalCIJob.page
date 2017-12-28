@@ -1,4 +1,4 @@
-<apex:page docType="html-5.0" standardController="copado__External_CI_Job__c" applyHtmlTag="true" showHeader="true" sidebar="true" standardStylesheets="true" extensions="copado.ExternalCIJobsExtension" title="{!$ObjectType.copado__External_CI_Job__c.Label}">
+<apex:page docType="html-5.0" standardController="copado__External_CI_Job__c" applyHtmlTag="true" showHeader="true" sidebar="true" standardStylesheets="true" extensions="copado.ExternalCIJobsExtension" title="{!$ObjectType.copado__External_CI_Job__c.Label}" lightningStylesheets="true">
 	<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en" style="height: 100%;">
 	    <head>
 	      <c:GAnalytics />
@@ -52,7 +52,11 @@
                 var j$ = jQuery.noConflict();
 
                 j$(document).ready(function(){
-                   overridePageMessages();    
+                   if( (typeof sforce != 'undefined') && sforce && (!!sforce.one) ) {
+	               		// No override in LEX
+	           		} else {
+	           			overridePageMessages();
+	           		}
                 });
                         
                 function overridePageMessages(){    
@@ -71,15 +75,13 @@
                 }
             </script>
 	    </head>
-	    <body class="slds-scope" style="{!IF($User.UIThemeDisplayed == 'Theme4d','margin: 12px;background-image: url(/_slds/images/themes/oneSalesforce/banner-brand-default.png?cache=210.2),linear-gradient(to top,rgba(32, 92, 159, 0), rgb(32, 92, 159));','')}">
-	    	<apex:form >
-	
-	    		<apex:outputPanel layout="block" id="pageMessages">
-                    <apex:pagemessages id="pmessage"/>
-                </apex:outputPanel>
+	    <body class="slds-scope" style="{!IF($User.UIThemeDisplayed == 'Theme4d','margin: 0 12px 12px 12px;background-image: url(/_slds/images/themes/oneSalesforce/banner-brand-default.png?cache=210.2),linear-gradient(to top,rgba(32, 92, 159, 0), rgb(32, 92, 159));','')}">
+	    	<apex:form >	    		
 	    		<apex:inputHidden id="dataJSON" value="{!tempJSON}" />
 		    	<div class="slds-page-header" style="{!IF($User.UIThemeDisplayed == 'Theme4d','background: #fdfdfd;margin-bottom: 12px;border-collapse: collapse;border-radius: 4px;','')}">
-	                
+	                <apex:outputPanel layout="block" id="pageMessages">
+                    	<apex:pagemessages id="pmessage"/>
+                	</apex:outputPanel>
 	                <div class="slds-grid">
 	                    <div class="slds-col slds-has-flexi-truncate">
 	                        <div class="slds-media">
@@ -184,8 +186,8 @@
 		                
 	                    <div class="slds-form--stacked">
 	                    	<apex:outputPanel layout="block" id="relatedLists" >
-	                         	<c:LightningReadyRelatedList parentId="{!externalCIJob.Id}" parentsObjectAPI="External_CI_Job__c" showButtons="true" sObjectAPI="External_CI_Job_Result__c" relationName="External_CI_Job_Results__r" sObjectList="{!jobResults}" title="{!$ObjectType.copado__External_CI_Job_Result__c.Label}" viewFieldName="Name" fieldSetName="relatedListFields" iconPath="/assets/icons/custom-sprite/svg/symbols.svg#custom87"/>
-	                         	<apex:relatedList list="External_CI_Job_Results__r" rendered="{!$User.UIThemeDisplayed == 'Theme3'}" id="stdRelatedList"/>
+	                         	<!--<c:LightningReadyRelatedList parentId="{!externalCIJob.Id}" parentsObjectAPI="External_CI_Job__c" showButtons="true" sObjectAPI="External_CI_Job_Result__c" relationName="External_CI_Job_Results__r" sObjectList="{!jobResults}" title="{!$ObjectType.External_CI_Job_Result__c.Label}" viewFieldName="Name" fieldSetName="relatedListFields" iconPath="/assets/icons/custom-sprite/svg/symbols.svg#custom87"/>-->
+	                         	<apex:relatedList list="External_CI_Job_Results__r" id="stdRelatedList"/> <!--rendered="{!$User.UIThemeDisplayed == 'Theme3'}"-->
 	                     	</apex:outputPanel>
 	                    </div>       
 		                

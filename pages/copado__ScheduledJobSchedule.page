@@ -13,10 +13,11 @@
         </style>
 
     	<link rel="stylesheet" href="{!URLFOR($Resource.jqx,'jqwidgets/styles/jqx.base.css')}" />
+        <apex:stylesheet value="{!IF($User.UIThemeDisplayed == 'Theme4d',URLFOR($Resource.copado__CopadoLightningCSS),'')}" />
         <c:GAnalytics />
     </head>
     
-    <body style="margin:0 16px 16px 16px;">
+    <body class="copado-lightning-container">
         <apex:sectionHeader id="theHeader" title="{!$ObjectType.copado__Scheduled_Job__c.Label}" subtitle="{!copado__Scheduled_Job__c.Name}"/>
     	<apex:form id="theForm">
             <apex:pageMessages id="theMessages"/>

@@ -241,7 +241,11 @@
                 var j$ = jQuery.noConflict();
 
                 j$(document).ready(function(){
-                   overridePageMessages();
+                    if( (typeof sforce != 'undefined') && sforce && (!!sforce.one) ) {
+                        // No override in LEX
+                    } else {
+                        overridePageMessages();
+                    }
                 });
 
                 function overridePageMessages(){    
@@ -288,6 +292,9 @@
                       <apex:outputPanel layout="block" id="pageMessages">
                         <apex:pagemessages id="msg"/>
                       </apex:outputPanel>
+                      <apex:form id="jobsManagerForm" style="padding-bottom:12px;">
+                        <c:JobsManager matchingKeys="{!jobsManagerMatchingKeys}"></c:JobsManager>
+                      </apex:form>
                       <div class="slds-grid">
                         <div class="slds-col slds-has-flexi-truncate">
                           <div class="slds-media">
@@ -299,8 +306,8 @@
                                   </span>
                               </div>
                               <div class="slds-media__body">
-                                <p class="slds-text-heading--label slds-line-height--reset">{!$ObjectType.Promotion__c.Label}</p>
-                                  <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="{!$ObjectType.Promotion__c.Label}">{!Promotion__c.Name}</h1>
+                                <p class="slds-text-heading--label slds-line-height--reset">{!$ObjectType.copado__Promotion__c.Label}</p>
+                                  <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="{!$ObjectType.copado__Promotion__c.Label}"><apex:outputField value="{!copado__Promotion__c.Name}"/></h1>
                               </div>
                           </div>
                         </div>
@@ -335,7 +342,7 @@
                     <apex:form id="theForm" >
                         <apex:actionFunction name="reRenderForm" reRender="theForm"/>
 
-                        <c:JobsManager matchingKeys="{!jobsManagerMatchingKeys}"></c:JobsManager>
+                        <c:JobsManager matchingKeys="{!jobsManagerMatchingKeys}" rendered="{!$User.UIThemeDisplayed != 'Theme4d'}"></c:JobsManager>
 
                         <apex:outputPanel rendered="{!promotion.copado__Source_Environment__c != null}" styleClass="copado-lightning-container">
                             <div class="slds-scope copado-lightning-container">
