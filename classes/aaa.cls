@@ -1,5 +1,5 @@
 public class aaa {
     public aaa() {
-        System.debug('newline2x');
+        System.debug('X1Y2X');
     }
 }
