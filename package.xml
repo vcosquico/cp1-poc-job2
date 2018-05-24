@@ -140,6 +140,11 @@
     <name>Report</name>
   </types>
   <types>
+    <members>yyy</members>
+    <members>yyy/zzz.txt</members>
+    <name>Document</name>
+  </types>
+  <types>
     <members>Account.Billing</members>
     <members>Campaign.ViewCampaignInfluenceReport</members>
     <members>Case.UpsellCrosssellOpportunity</members>
