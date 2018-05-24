@@ -456,11 +456,6 @@
     <name>CleanDataService</name>
   </types>
   <types>
-    <members>AppSwitcher</members>
-    <members>Salesforce1</members>
-    <name>AppMenu</name>
-  </types>
-  <types>
     <members>Contact.Update1</members>
     <members>Contact.Update2</members>
     <members>Contact.Update3</members>
