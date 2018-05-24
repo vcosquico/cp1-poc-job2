@@ -4,7 +4,7 @@
         <fullName>Standard</fullName>
         <active>true</active>
         <ruleEntry>
-            <assignedTo>nr+cv7@copa.do</assignedTo>
+            <assignedTo>nr+cv6@copa.do</assignedTo>
             <assignedToType>User</assignedToType>
             <criteriaItems>
                 <field>Lead.Country</field>
@@ -13,7 +13,7 @@
             </criteriaItems>
         </ruleEntry>
         <ruleEntry>
-            <assignedTo>nr+cv7@copa.do</assignedTo>
+            <assignedTo>nr+cv6@copa.do</assignedTo>
             <assignedToType>User</assignedToType>
             <criteriaItems>
                 <field>Lead.Country</field>
